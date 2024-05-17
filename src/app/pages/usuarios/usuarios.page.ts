@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -17,9 +18,21 @@ export class UsuariosPage implements OnInit {
     { title: 'Usuario 7' },
     { title: 'Usuario 8' },
   ];
-  constructor() { }
+
+  listUsers:any = "";
+
+  constructor(
+    private usuariosService: UsuariosService
+
+  ) { }
 
   ngOnInit() {
+
+    this.usuariosService.getUsers()
+    .subscribe( resp => {
+      this.listUsers = resp;
+    })
+
   }
 
 }
